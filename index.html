@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NOVA XMD - WhatsApp Pairing Code Generator & Server Hub</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            nova: {
+              bg: '#050410',
+              sidebar: '#09081a',
+              card: '#0c0a24',
+              cardGlow: '#120d36',
+              border: '#231d52',
+              purple: '#843dff',
+              purpleDark: '#6016e7',
+              pink: '#c026d3',
+              cyan: '#06b6d4',
+              accent: '#9333ea',
+              gold: '#f59e0b'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          boxShadow: {
+            'glow-purple': '0 0 25px -5px rgba(132, 61, 255, 0.45), 0 0 10px -6px rgba(132, 61, 255, 0.3)',
+            'glow-purple-lg': '0 0 40px -5px rgba(132, 61, 255, 0.55), 0 0 20px -8px rgba(192, 38, 211, 0.35)',
+            'glow-gold': '0 0 25px -4px rgba(245, 158, 11, 0.5), 0 0 10px -4px rgba(245, 158, 11, 0.3)',
+            'glow-cyan': '0 0 20px -5px rgba(6, 182, 212, 0.4)',
+            'inner-glow': 'inset 0 1px 1px 0 rgba(255, 255, 255, 0.15)',
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 4s ease-in-out infinite',
+            'wave-glow': 'waveGlow 8s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' },
+            },
+            waveGlow: {
+              '0%': { opacity: '0.4', transform: 'scale(1)' },
+              '100%': { opacity: '0.8', transform: 'scale(1.08)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS for glowing effects and background waves -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#050410] text-gray-200 font-sans min-h-screen relative overflow-x-hidden selection:bg-purple-600 selection:text-white pb-24 lg:pb-8">
+
+  <!-- Background Aurora Glow Orbs & World Grid Map -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Top-Center Aurora Glow -->
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-b from-purple-600/25 via-indigo-600/15 to-transparent blur-[120px] rounded-full"></div>
+    
+    <!-- Top-Right Violet Glow -->
+    <div class="absolute top-10 right-0 w-[500px] h-[500px] bg-purple-700/15 blur-[140px] rounded-full"></div>
+
+    <!-- Bottom-Left Aurora Waves -->
+    <div class="absolute -bottom-24 -left-24 w-[600px] h-[600px] bg-gradient-to-tr from-purple-700/35 via-blue-600/20 to-transparent blur-[110px] rounded-full"></div>
+    <div class="absolute bottom-10 left-32 w-[350px] h-[350px] bg-indigo-500/20 blur-[90px] rounded-full animate-wave-glow"></div>
+
+    <!-- Subdued World Map / Dotted Grid Overlay -->
+    <div class="absolute top-0 right-0 w-full lg:w-3/4 h-[420px] opacity-[0.07] bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+  </div>
+
+  <!-- ================= 1. MOBILE TOP HEADER ================= -->
+  <header class="lg:hidden sticky top-0 z-40 bg-[#080718]/95 backdrop-blur-xl border-b border-purple-900/40 px-4 py-3 flex items-center justify-between shadow-lg">
+    <!-- Brand Logo -->
+    <button class="nav-tab-trigger flex items-center gap-2.5 text-left focus:outline-none" data-tab="home">
+      <div class="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center p-[1px] shadow-glow-purple">
+        <div class="w-full h-full bg-[#0d0a27] rounded-[11px] flex items-center justify-center">
+          <span class="font-display font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-purple-300 text-lg">N</span>
+        </div>
+      </div>
+      <div>
+        <span class="font-display font-black text-base tracking-wider text-white">NOVA <span class="text-purple-400">XMD</span></span>
+        <span class="block text-[10px] text-purple-300/60 font-medium -mt-0.5">WhatsApp Bot Hub</span>
+      </div>
+    </button>
+
+    <!-- Header Actions (Server Online pill + VIP button + Hamburger) -->
+    <div class="flex items-center gap-2">
+      <!-- Server Online badge -->
+      <button id="mobileHeaderStatusPill" class="nav-tab-trigger hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold" data-tab="servers">
+        <span id="mobileHeaderStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="mobileHeaderStatusText">Online</span>
+      </button>
+
+      <!-- Upgrade VIP Shortcut Pill on Mobile Header -->
+      <button class="nav-tab-trigger flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-amber-500/20 to-purple-600/20 border border-amber-500/40 text-amber-300 text-xs font-bold shadow-sm" data-tab="upgrade">
+        <i data-lucide="crown" class="w-3.5 h-3.5 text-amber-400"></i>
+        <span>VIP</span>
+      </button>
+
+      <!-- Hamburger Menu Button (☰) -->
+      <button id="mobileMenuBtn" class="p-2 rounded-xl bg-[#140e35] border border-purple-700/50 text-purple-200 hover:text-white active:scale-95 transition shadow-sm" aria-label="Open Navigation Menu">
+        <i data-lucide="menu" class="w-5 h-5 text-purple-300"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MOBILE DRAWER MENU ================= -->
+  <div id="mobileDrawer" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden transition-opacity duration-300 lg:hidden">
+    <div class="w-72 max-w-[85%] h-full bg-[#080718] border-r border-purple-900/50 p-5 flex flex-col justify-between overflow-y-auto shadow-2xl">
+      <div>
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between pb-5 border-b border-purple-900/30">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-600 p-[1px] flex items-center justify-center">
+              <div class="w-full h-full bg-[#0a0720] rounded-[7px] flex items-center justify-center">
+                <span class="font-display font-extrabold text-white text-sm">N</span>
+              </div>
+            </div>
+            <div>
+              <span class="font-display font-bold text-base text-white">NOVA XMD</span>
+              <span class="block text-[10px] text-purple-300/60">Power Beyond Limits</span>
+            </div>
+          </div>
+          <button id="closeDrawerBtn" class="p-1.5 rounded-lg bg-purple-950/40 text-gray-400 hover:text-white" aria-label="Close Menu">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Navigation Links in Mobile Drawer -->
+        <nav class="mt-5 space-y-1.5" id="mobileDrawerNav">
+          <!-- Home -->
+          <button class="drawer-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold shadow-glow-purple text-left transition" data-tab="home">
+            <div class="flex items-center gap-3">
+              <i data-lucide="home" class="w-5 h-5"></i>
+              <span>Home</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-purple-200/60"></i>
+          </button>
+
+          <!-- Dashboard -->
+          <button class="drawer-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl text-gray-300 hover:text-white hover:bg-purple-950/40 font-medium text-left transition" data-tab="dashboard">
+            <div class="flex items-center gap-3">
+              <i data-lucide="layout-dashboard" class="w-5 h-5 text-purple-400/80"></i>
+              <span>Dashboard</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold">Bot Status</span>
+          </button>
+
+          <!-- Servers (High priority) -->
+          <button class="drawer-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl text-gray-300 hover:text-white hover:bg-purple-950/40 font-medium text-left transition" data-tab="servers">
+            <div class="flex items-center gap-3">
+              <i data-lucide="server" class="w-5 h-5 text-purple-400/80"></i>
+              <span>Servers</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">3 Online</span>
+          </button>
+
+          <!-- Upgrade (VIP Servers) -->
+          <button class="drawer-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-gradient-to-r from-amber-500/10 to-purple-600/10 border border-amber-500/30 text-amber-300 font-bold text-left transition hover:border-amber-400/60" data-tab="upgrade">
+            <div class="flex items-center gap-3">
+              <i data-lucide="crown" class="w-5 h-5 text-amber-400"></i>
+              <span>Upgrade (VIP)</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-purple-600 text-white text-[10px] font-extrabold shadow-sm">
+              HOT 🔥
+            </span>
+          </button>
+
+          <!-- Settings -->
+          <button class="drawer-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl text-gray-300 hover:text-white hover:bg-purple-950/40 font-medium text-left transition" data-tab="settings">
+            <div class="flex items-center gap-3">
+              <i data-lucide="settings" class="w-5 h-5 text-purple-400/80"></i>
+              <span>Settings</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-purple-400/40"></i>
+          </button>
+
+          <!-- Support -->
+          <button class="drawer-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl text-gray-300 hover:text-white hover:bg-purple-950/40 font-medium text-left transition" data-tab="support">
+            <div class="flex items-center gap-3">
+              <i data-lucide="help-circle" class="w-5 h-5 text-purple-400/80"></i>
+              <span>Support</span>
+            </div>
+            <span class="text-[10px] text-purple-300/60">24/7 VIP</span>
+          </button>
+
+          <!-- About -->
+          <button class="drawer-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl text-gray-300 hover:text-white hover:bg-purple-950/40 font-medium text-left transition" data-tab="about">
+            <div class="flex items-center gap-3">
+              <i data-lucide="info" class="w-5 h-5 text-purple-400/80"></i>
+              <span>About</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-purple-400/40"></i>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Drawer Bottom Premium Sales Card -->
+      <div class="mt-6 p-4 rounded-2xl bg-gradient-to-b from-[#181042] to-[#0c0926] border border-amber-500/30 text-center shadow-lg relative overflow-hidden">
+        <div class="w-8 h-8 rounded-full bg-amber-400/15 border border-amber-400/30 flex items-center justify-center mx-auto mb-2 text-amber-400">
+          <i data-lucide="crown" class="w-4 h-4"></i>
+        </div>
+        <h4 class="font-display font-bold text-white text-sm">Go Premium</h4>
+        <p class="text-[11px] text-purple-200/70 mt-1 mb-3">Unlock dedicated VIP servers with 99.9% uptime & Anti-Ban.</p>
+        <button class="nav-tab-trigger w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-purple-600 to-indigo-600 text-white text-xs font-bold hover:brightness-110 shadow-glow-gold transition" data-tab="upgrade">
+          Upgrade Now ✦
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. MOBILE BOTTOM NAVIGATION BAR ================= -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 lg:hidden bg-[#070518]/95 backdrop-blur-2xl border-t border-purple-900/50 px-2 pt-2 pb-safe shadow-[0_-8px_30px_rgba(0,0,0,0.8)]">
+    <div class="grid grid-cols-4 items-center max-w-md mx-auto">
+      
+      <!-- Button 1: Home -->
+      <button class="mobile-bottom-tab active flex flex-col items-center justify-center py-1 transition group text-white" data-tab="home">
+        <div class="tab-icon-wrap relative p-1 rounded-xl transition">
+          <i data-lucide="home" class="w-5 h-5"></i>
+        </div>
+        <span class="tab-label text-[11px] font-semibold mt-0.5">Home</span>
+      </button>
+
+      <!-- Button 2: Servers -->
+      <button class="mobile-bottom-tab flex flex-col items-center justify-center py-1 transition group text-purple-300/70 hover:text-white" data-tab="servers">
+        <div class="tab-icon-wrap relative p-1 rounded-xl transition">
+          <i data-lucide="server" class="w-5 h-5"></i>
+          <!-- Live Green status dot -->
+          <span class="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]"></span>
+        </div>
+        <span class="tab-label text-[11px] font-semibold mt-0.5">Servers</span>
+      </button>
+
+      <!-- Button 3: Upgrade (Highlighted Golden / VIP Button) -->
+      <button class="mobile-bottom-tab flex flex-col items-center justify-center py-1 transition group text-amber-300" data-tab="upgrade">
+        <div class="tab-icon-wrap relative p-1.5 -mt-3.5 rounded-2xl bg-gradient-to-br from-amber-400 via-purple-600 to-indigo-600 border-2 border-[#070518] shadow-glow-gold animate-vip-float">
+          <i data-lucide="crown" class="w-5 h-5 text-white"></i>
+        </div>
+        <span class="tab-label text-[11px] font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-200 mt-0.5">Upgrade</span>
+      </button>
+
+      <!-- Button 4: Menu (Triggers the full drawer menu) -->
+      <button id="bottomMenuTriggerBtn" class="flex flex-col items-center justify-center py-1 transition text-purple-300/70 hover:text-white">
+        <div class="relative p-1 rounded-xl transition">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </div>
+        <span class="text-[11px] font-semibold mt-0.5">Menu</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ================= MAIN CONTAINER LAYOUT ================= -->
+  <div class="relative z-10 max-w-[1360px] mx-auto px-3 sm:px-5 lg:px-6 py-4 lg:py-6">
+    <div class="flex gap-6 items-start">
+
+      <!-- ================= SIDEBAR (DESKTOP) ================= -->
+      <aside class="hidden lg:flex flex-col w-[260px] xl:w-[275px] shrink-0 min-h-[920px] rounded-[28px] bg-[#070617]/85 backdrop-blur-xl border border-purple-900/35 p-5 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] justify-between relative overflow-hidden">
+        
+        <!-- Subtle Glow at top of sidebar -->
+        <div class="absolute -top-16 -left-16 w-44 h-44 bg-purple-600/20 blur-3xl rounded-full pointer-events-none"></div>
+
+        <div>
+          <!-- BRAND LOGO -->
+          <div class="flex flex-col items-center text-center pt-2 pb-6 cursor-pointer nav-tab-trigger" data-tab="home">
+            <!-- Crown & Stylized N Icon -->
+            <div class="relative mb-2 group">
+              <!-- Crown SVG -->
+              <svg class="w-10 h-7 mx-auto text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.7)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/>
+                <circle cx="2" cy="4" r="1.2" fill="currentColor"/>
+                <circle cx="12" cy="4" r="1.2" fill="currentColor"/>
+                <circle cx="22" cy="4" r="1.2" fill="currentColor"/>
+              </svg>
+
+              <!-- Stylized N Letter Logo -->
+              <div class="w-12 h-12 mt-1 mx-auto rounded-xl bg-gradient-to-br from-purple-500 via-indigo-600 to-fuchsia-600 p-[2px] shadow-glow-purple">
+                <div class="w-full h-full bg-[#0a0720] rounded-[10px] flex items-center justify-center">
+                  <span class="font-display font-black text-2xl text-transparent bg-clip-text bg-gradient-to-b from-white via-purple-200 to-purple-400">N</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h1 class="font-display font-extrabold text-xl tracking-wider text-white mt-1">NOVA XMD</h1>
+            <p class="text-xs text-purple-300/60 font-medium tracking-wide">Power Beyond Limits</p>
+          </div>
+
+          <!-- SIDEBAR MENU ITEMS (DESKTOP) -->
+          <nav class="space-y-1.5 mt-2" id="desktopNav">
+            <!-- Home (Active) -->
+            <button class="desktop-nav-item w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold shadow-[0_4px_20px_rgba(132,61,255,0.45)] transition-all duration-200 text-left" data-tab="home">
+              <i data-lucide="home" class="w-5 h-5 text-white"></i>
+              <span class="text-sm tracking-wide">Home</span>
+            </button>
+
+            <!-- Dashboard -->
+            <button class="desktop-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl text-purple-200/70 hover:text-white hover:bg-purple-900/20 transition-all duration-200 text-left" data-tab="dashboard">
+              <div class="flex items-center gap-3.5">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 text-purple-400/80"></i>
+                <span class="text-sm font-medium tracking-wide">Dashboard</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded-md bg-purple-500/20 text-purple-300 text-[10px] font-bold">Bot Status</span>
+            </button>
+
+            <!-- Servers (High Priority) -->
+            <button class="desktop-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl text-purple-200/70 hover:text-white hover:bg-purple-900/20 transition-all duration-200 text-left" data-tab="servers">
+              <div class="flex items-center gap-3.5">
+                <i data-lucide="server" class="w-5 h-5 text-purple-400/80"></i>
+                <span class="text-sm font-medium tracking-wide">Servers</span>
+              </div>
+              <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]"></span>
+            </button>
+
+            <!-- Upgrade (VIP Sales Tab) -->
+            <button class="desktop-nav-item w-full flex items-center justify-between px-4 py-3 rounded-2xl text-amber-300/90 hover:text-amber-200 hover:bg-amber-500/10 border border-amber-500/20 transition-all duration-200 text-left" data-tab="upgrade">
+              <div class="flex items-center gap-3.5">
+                <i data-lucide="crown" class="w-5 h-5 text-amber-400"></i>
+                <span class="text-sm font-bold tracking-wide">Upgrade</span>
+              </div>
+              <span class="px-1.5 py-0.5 rounded-md bg-amber-400/20 text-amber-300 text-[10px] font-bold">VIP</span>
+            </button>
+
+            <!-- Settings -->
+            <button class="desktop-nav-item w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-purple-200/70 hover:text-white hover:bg-purple-900/20 transition-all duration-200 text-left" data-tab="settings">
+              <i data-lucide="settings" class="w-5 h-5 text-purple-400/80"></i>
+              <span class="text-sm font-medium tracking-wide">Settings</span>
+            </button>
+
+            <!-- Support -->
+            <button class="desktop-nav-item w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-purple-200/70 hover:text-white hover:bg-purple-900/20 transition-all duration-200 text-left" data-tab="support">
+              <i data-lucide="help-circle" class="w-5 h-5 text-purple-400/80"></i>
+              <span class="text-sm font-medium tracking-wide">Support</span>
+            </button>
+
+            <!-- About -->
+            <button class="desktop-nav-item w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-purple-200/70 hover:text-white hover:bg-purple-900/20 transition-all duration-200 text-left" data-tab="about">
+              <i data-lucide="info" class="w-5 h-5 text-purple-400/80"></i>
+              <span class="text-sm font-medium tracking-wide">About</span>
+            </button>
+          </nav>
+        </div>
+
+        <div>
+          <!-- GO PREMIUM CARD (DESKTOP) -->
+          <div class="relative rounded-2xl bg-gradient-to-b from-[#160f3d] to-[#0c0926] border border-purple-500/30 p-4 text-center overflow-hidden group shadow-lg">
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-28 h-28 bg-purple-500/20 rounded-full blur-2xl"></div>
+
+            <div class="relative z-10">
+              <div class="w-9 h-9 mx-auto mb-2 flex items-center justify-center">
+                <svg class="w-8 h-8 text-amber-400 filter drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M2.5 19h19a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-19a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1zm1.2-5.4 2.8-7.6c.2-.5.8-.8 1.3-.5.3.1.5.4.6.7l2.1 4.5 3.3-7.7c.2-.5.8-.8 1.3-.5.2.1.4.3.5.5l3.3 7.7 2.1-4.5c.2-.5.8-.7 1.3-.5.3.1.5.4.6.7l2.8 7.6a1 1 0 0 1-.9 1.4H4.6a1 1 0 0 1-.9-1.3z"/>
+                </svg>
+              </div>
+
+              <h3 class="font-display font-bold text-white text-base">Go Premium</h3>
+              <p class="text-[12px] text-purple-200/70 mt-1 leading-snug">
+                Unlock 99.9% uptime, Anti-Ban & priority dedicated servers.
+              </p>
+
+              <!-- Upgrade Button -->
+              <button class="nav-tab-trigger mt-3.5 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 bg-size-200 hover:bg-pos-100 text-white text-xs font-bold tracking-wide shadow-glow-purple hover:shadow-glow-purple-lg transition-all duration-300 flex items-center justify-center gap-1.5 active:scale-[0.98]" data-tab="upgrade">
+                <span>Upgrade Now</span>
+                <span class="text-amber-300">✦</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- COPYRIGHT -->
+          <div class="text-center pt-5 pb-1">
+            <p class="text-[11px] text-purple-300/40 font-medium">
+              © 2026 NOVA XMD.<br>All rights reserved.
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ================= MAIN CONTENT AREA ================= -->
+      <main class="flex-1 w-full min-w-0 space-y-6">
+
+        <!-- TOP BAR: SERVER STATUS & PROFILE (DESKTOP) -->
+        <div class="hidden lg:flex items-center justify-end gap-3 pt-1">
+          <!-- Server Online Pill -->
+          <button id="desktopHeaderStatusPill" class="nav-tab-trigger flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0a0720]/80 border border-purple-900/40 backdrop-blur-md shadow-inner-glow hover:border-purple-600 transition" data-tab="servers">
+            <span class="relative flex h-2.5 w-2.5">
+              <span id="desktopHeaderPingDot" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span id="desktopHeaderStatusDot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_8px_#10b981]"></span>
+            </span>
+            <span id="desktopHeaderStatusText" class="text-xs font-semibold text-gray-200">Server Online (WhatsApp 🟢)</span>
+          </button>
+
+          <!-- Upgrade VIP quick CTA -->
+          <button class="nav-tab-trigger flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-600/20 border border-amber-500/40 text-amber-300 text-xs font-bold hover:border-amber-400 transition" data-tab="upgrade">
+            <i data-lucide="crown" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>VIP Servers</span>
+          </button>
+
+          <!-- Profile Avatar Button -->
+          <button class="relative w-9 h-9 rounded-full bg-[#110c2c] border border-purple-700/40 flex items-center justify-center text-purple-200 hover:text-white hover:border-purple-500 transition shadow-sm" title="User Profile">
+            <i data-lucide="user" class="w-4 h-4"></i>
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-purple-500 border-2 border-[#050410]"></span>
+          </button>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- VIEW 1: HOME (PAIRING CODE GENERATOR)                    -->
+        <!-- ======================================================== -->
+        <div id="view-home" class="tab-view space-y-6">
+          
+          <!-- HERO SECTION: LOGO BADGE & HEADLINE -->
+          <section class="flex flex-col items-center text-center pt-2 pb-3">
+            
+            <!-- Circular Glowing Badge -->
+            <div class="relative mb-5 group">
+              <div class="absolute -inset-2 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-indigo-600 rounded-full blur-xl opacity-70 group-hover:opacity-100 transition duration-700 animate-pulse-slow"></div>
+
+              <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[3px] bg-gradient-to-b from-purple-400 via-indigo-500 to-purple-800 shadow-glow-purple-lg">
+                <div class="w-full h-full rounded-full bg-[#090720] flex flex-col items-center justify-center relative overflow-hidden border border-purple-500/30">
+                  <div class="absolute top-0 inset-x-0 h-10 bg-gradient-to-b from-purple-400/20 to-transparent"></div>
+
+                  <!-- Crown SVG -->
+                  <svg class="w-8 h-6 text-purple-300 drop-shadow-[0_0_8px_rgba(192,38,211,0.8)] mb-0.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.5 19h19a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-19a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1zm1.2-5.4 2.8-7.6c.2-.5.8-.8 1.3-.5.3.1.5.4.6.7l2.1 4.5 3.3-7.7c.2-.5.8-.8 1.3-.5.2.1.4.3.5.5l3.3 7.7 2.1-4.5c.2-.5.8-.7 1.3-.5.3.1.5.4.6.7l2.8 7.6a1 1 0 0 1-.9 1.4H4.6a1 1 0 0 1-.9-1.3z"/>
+                  </svg>
+
+                  <!-- Letter N -->
+                  <span class="font-display font-black text-3xl sm:text-4xl text-white tracking-wider leading-none">N</span>
+
+                  <!-- Sub-text -->
+                  <span class="text-[9px] sm:text-[10px] font-bold tracking-widest text-purple-200 mt-1 uppercase">NOVA XMD</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Title -->
+            <h2 class="font-display font-extrabold text-2xl sm:text-4xl lg:text-[40px] tracking-tight text-white">
+              Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-400 drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">NOVA XMD</span>
+            </h2>
+
+            <!-- Subtitle -->
+            <p class="text-sm sm:text-base text-purple-200/80 font-medium mt-1.5 tracking-wide">
+              WhatsApp Pairing Code Generator
+            </p>
+
+            <!-- Safe • Fast • Reliable Pill -->
+            <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#110d33]/90 border border-purple-500/30 text-purple-200 text-xs sm:text-sm font-semibold shadow-inner-glow">
+              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                <i data-lucide="check" class="w-3 h-3 text-emerald-400"></i>
+              </span>
+              <span class="tracking-wide text-xs">Safe &nbsp;•&nbsp; Fast &nbsp;•&nbsp; Reliable</span>
+            </div>
+          </section>
+
+          <!-- STATS CARDS ROW (3 CARDS) -->
+          <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- Card 1: Active Servers -->
+            <div class="nav-tab-trigger relative rounded-2xl bg-[#0a0822]/85 backdrop-blur-md border border-purple-900/35 p-4 flex items-center gap-4 hover:border-purple-600/50 transition-all duration-300 group shadow-lg cursor-pointer" data-tab="servers">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600/30 to-purple-600/20 border border-purple-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="server" class="w-6 h-6 text-purple-300"></i>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <p class="text-xs text-purple-300/70 font-medium">Active Servers</p>
+                  <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-purple-400/40 group-hover:text-purple-300 transition"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-display text-white" id="statActiveServersCount">3</h3>
+                <div class="flex items-center gap-1.5 mt-0.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" id="statActiveServersDot"></span>
+                  <span class="text-[11px] text-emerald-400 font-semibold" id="statActiveServersStatus">Online (View all)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Total Users -->
+            <div class="relative rounded-2xl bg-[#0a0822]/85 backdrop-blur-md border border-purple-900/35 p-4 flex items-center gap-4 hover:border-purple-600/40 transition-all duration-300 group shadow-lg">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600/30 to-fuchsia-600/20 border border-purple-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="users" class="w-6 h-6 text-purple-300"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-xs text-purple-300/70 font-medium">Total Users</p>
+                <h3 class="text-2xl font-bold font-display text-white" id="statUsersCount">80</h3>
+                <div class="flex items-center gap-1 mt-0.5">
+                  <i data-lucide="arrow-up" class="w-3 h-3 text-emerald-400"></i>
+                  <span class="text-[11px] text-emerald-400 font-semibold" id="statUsersGrowth">+12%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: Free Slots -->
+            <div class="nav-tab-trigger relative rounded-2xl bg-[#0a0822]/85 backdrop-blur-md border border-purple-900/35 p-4 flex items-center gap-4 hover:border-amber-500/40 transition-all duration-300 group shadow-lg cursor-pointer" data-tab="upgrade">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600/30 to-indigo-600/20 border border-purple-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="zap" class="w-6 h-6 text-purple-300"></i>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <p class="text-xs text-purple-300/70 font-medium">Free Slots</p>
+                  <span class="text-[10px] text-amber-400 font-bold">Get VIP ✦</span>
+                </div>
+                <h3 class="text-2xl font-bold font-display text-white" id="statFreeSlots">47</h3>
+                <div class="w-full h-1.5 bg-purple-950/60 rounded-full mt-2 overflow-hidden border border-purple-900/30">
+                  <div id="statFreeSlotsBar" class="h-full bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full w-[47%] transition-all duration-700"></div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- ================= PAIRING CODE GENERATOR BOX ================= -->
+          <section class="relative rounded-3xl bg-gradient-to-b from-[#100c31] via-[#0c0926] to-[#08061b] border border-purple-600/30 p-5 sm:p-7 shadow-[0_10px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl overflow-hidden">
+            
+            <div class="absolute -top-24 -right-24 w-60 h-60 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Card Header -->
+            <div class="flex items-start gap-3 mb-6">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center shrink-0 text-amber-400 mt-0.5">
+                <i data-lucide="zap" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-lg sm:text-xl text-white">Pairing Code Generator</h3>
+                <p class="text-xs sm:text-sm text-purple-200/70 mt-0.5">
+                  Enter your WhatsApp number and get your real pairing code instantly.
+                </p>
+              </div>
+            </div>
+
+            <!-- INPUT FORM -->
+            <form id="pairCodeForm" onsubmit="return false;" class="space-y-4">
+              
+              <!-- PHONE NUMBER INPUT GROUP -->
+              <div class="relative flex items-center bg-[#070517] border border-purple-900/60 focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-500/20 rounded-2xl p-2 transition-all duration-200">
+                
+                <!-- WhatsApp Icon Badge -->
+                <div class="w-10 h-10 rounded-xl bg-[#25D366]/15 border border-[#25D366]/30 flex items-center justify-center shrink-0 ml-1">
+                  <svg class="w-5 h-5 text-[#25D366] fill-current" viewBox="0 0 24 24">
+                    <path d="M12.004 2c-5.518 0-9.996 4.478-9.996 9.996 0 1.761.459 3.479 1.332 5.002L2 22l5.163-1.328c1.472.802 3.129 1.228 4.841 1.228 5.518 0 9.996-4.478 9.996-9.996 0-5.518-4.478-9.996-9.996-9.996zm0 18.283c-1.503 0-2.973-.404-4.256-1.168l-.305-.181-3.158.812.842-3.078-.198-.316c-.84-1.337-1.284-2.887-1.284-4.472 0-4.57 3.717-8.287 8.287-8.287 4.57 0 8.287 3.717 8.287 8.287 0 4.57-3.717 8.287-8.287 8.287zm4.542-6.208c-.249-.125-1.474-.727-1.703-.81-.229-.083-.395-.125-.561.125-.166.249-.644.81-.789.977-.145.166-.291.187-.54.062s-1.053-.388-2.006-1.238c-.742-.662-1.243-1.48-1.389-1.729-.145-.249-.016-.384.109-.508.112-.112.249-.291.374-.437.125-.145.166-.249.249-.415.083-.166.042-.312-.021-.437-.062-.125-.561-1.351-.769-1.85-.203-.486-.409-.42-.561-.428-.145-.008-.312-.01-.478-.01s-.437.062-.665.312c-.229.249-.873.852-.873 2.078s.894 2.41 1.019 2.577c.125.166 1.76 2.688 4.264 3.769.596.257 1.061.411 1.424.526.598.19 1.143.163 1.574.099.48-.072 1.474-.603 1.682-1.185.208-.582.208-1.081.145-1.185-.062-.104-.229-.166-.478-.291z"/>
+                  </svg>
+                </div>
+
+                <!-- Country Code Selector Button -->
+                <div class="relative ml-2">
+                  <button type="button" id="countryDropdownBtn" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-purple-950/40 hover:bg-purple-900/40 border border-purple-800/40 text-white font-medium text-sm transition">
+                    <span id="selectedFlag">🇸🇴</span>
+                    <span id="selectedCode">+252</span>
+                    <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-purple-300"></i>
+                  </button>
+
+                  <!-- Dropdown Menu for Countries -->
+                  <div id="countryDropdownList" class="absolute top-full left-0 mt-2 w-64 max-h-60 overflow-y-auto rounded-2xl bg-[#0e0a29] border border-purple-600/40 shadow-2xl p-2 z-50 hidden custom-scrollbar">
+                    <div class="p-1 mb-1">
+                      <input type="text" id="countrySearch" placeholder="Search country or code..." class="w-full bg-[#150f3b] border border-purple-800/50 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-500">
+                    </div>
+                    <div id="countryListOptions" class="space-y-0.5"></div>
+                  </div>
+                </div>
+
+                <!-- Number Input Field -->
+                <div class="flex-1 ml-2">
+                  <input 
+                    type="tel" 
+                    id="phoneNumberInput" 
+                    placeholder="Enter your WhatsApp number..." 
+                    class="w-full bg-transparent border-none text-white placeholder-purple-300/40 text-sm sm:text-base font-medium focus:outline-none focus:ring-0 px-2 py-1.5"
+                    autocomplete="tel"
+                  >
+                </div>
+
+                <!-- Clear Input Button -->
+                <button type="button" id="clearInputBtn" class="text-purple-400/50 hover:text-purple-300 p-1 mr-2 hidden">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <!-- Error/Validation Message -->
+              <div id="inputErrorMsg" class="hidden text-rose-400 text-xs px-2 flex items-center gap-1.5">
+                <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i>
+                <span id="errorText">Please enter a valid phone number.</span>
+              </div>
+
+              <!-- PRIMARY BUTTON: GENERATE PAIR CODE -->
+              <button 
+                type="submit" 
+                id="generateBtn"
+                class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 bg-size-200 hover:bg-pos-100 text-white font-display font-bold text-base sm:text-lg shadow-[0_4px_25px_rgba(132,61,255,0.5)] hover:shadow-glow-purple-lg active:scale-[0.99] transition-all duration-300 flex items-center justify-center gap-3 relative overflow-hidden group"
+              >
+                <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+
+                <svg id="btnIconPlane" class="w-5 h-5 text-white transform -rotate-12 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+
+                <svg id="btnSpinner" class="w-5 h-5 text-white animate-spin hidden" viewBox="0 0 24 24" fill="none">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+
+                <span id="btnText">Generate Pair Code</span>
+              </button>
+
+              <!-- OR DIVIDER -->
+              <div class="relative flex items-center justify-center py-1">
+                <div class="border-t border-purple-900/40 w-full"></div>
+                <span class="bg-[#0c0926] px-4 text-xs font-semibold uppercase tracking-widest text-purple-300/40">OR</span>
+                <div class="border-t border-purple-900/40 w-full"></div>
+              </div>
+
+              <!-- SCAN QR CODE BUTTON -->
+              <button 
+                type="button" 
+                id="scanQrBtn"
+                class="w-full py-3.5 px-6 rounded-2xl bg-[#0c0827]/80 hover:bg-purple-950/40 border border-purple-700/35 hover:border-purple-500/60 text-white font-medium text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-3 shadow-md group"
+              >
+                <i data-lucide="scan" class="w-5 h-5 text-purple-400 group-hover:scale-110 transition-transform"></i>
+                <span>Scan QR Code</span>
+                <span class="ml-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-[0_0_10px_rgba(168,85,247,0.4)]">
+                  New
+                </span>
+              </button>
+
+            </form>
+
+            <!-- ================= CODE DISPLAY RESULT BOX ================= -->
+            <div class="mt-6">
+              <div 
+                id="resultBox"
+                class="relative rounded-2xl bg-[#060416] border border-purple-900/50 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 transition-all duration-300 min-h-[84px]"
+              >
+                <!-- Idle placeholder state -->
+                <div id="idleState" class="flex items-center gap-4 w-full">
+                  <div class="w-11 h-11 rounded-2xl bg-purple-600/15 border border-purple-500/30 flex items-center justify-center shrink-0 text-purple-400">
+                    <i data-lucide="check" class="w-6 h-6 text-purple-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-display font-bold text-white text-base">Your pairing code will appear here</h4>
+                    <p class="text-xs text-purple-300/60">Copy the code and link your WhatsApp</p>
+                  </div>
+                </div>
+
+                <!-- Generated Success State -->
+                <div id="successState" class="hidden w-full flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0 text-emerald-400 animate-pulse">
+                      <i data-lucide="check-circle-2" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                      <span class="text-[11px] uppercase tracking-wider text-purple-300/70 font-semibold">Your Pairing Code:</span>
+                      <div class="flex items-center gap-3">
+                        <span id="generatedCodeDisplay" class="font-mono font-black text-2xl sm:text-3xl tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-purple-400">
+                          ABCD - 1234
+                        </span>
+                      </div>
+                      <span id="countdownDisplay" class="text-[11px] text-amber-400/90 font-medium">Expires in: 120s</span>
+                    </div>
+                  </div>
+
+                  <!-- Actions: Copy & Go to Dashboard -->
+                  <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <button 
+                      id="copyCodeBtn"
+                      class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-glow-purple active:scale-95 transition"
+                    >
+                      <i data-lucide="copy" class="w-4 h-4"></i>
+                      <span id="copyBtnText">Copy Code</span>
+                    </button>
+                    <button 
+                      class="nav-tab-trigger px-3.5 py-2.5 rounded-xl bg-purple-950/60 border border-purple-700/50 hover:bg-purple-900/60 text-purple-200 text-xs font-semibold transition"
+                      data-tab="dashboard"
+                      title="View Bot Dashboard"
+                    >
+                      <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </section>
+
+          <!-- ================= HOW TO GET YOUR CODE SECTION ================= -->
+          <section class="relative rounded-3xl bg-[#090722]/80 border border-purple-900/35 p-6 sm:p-7 backdrop-blur-xl overflow-hidden shadow-lg">
+            
+            <div class="absolute bottom-0 right-0 w-80 h-80 bg-purple-700/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              
+              <!-- Left Column: Steps -->
+              <div class="lg:col-span-7 space-y-4">
+                <div class="flex items-center gap-3 mb-5">
+                  <div class="w-8 h-8 rounded-xl bg-amber-400/15 border border-amber-400/30 flex items-center justify-center text-amber-400">
+                    <i data-lucide="lightbulb" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+                  </div>
+                  <h3 class="font-display font-bold text-lg sm:text-xl text-white">How to get your code</h3>
+                </div>
+
+                <div class="space-y-3.5">
+                  <div class="flex items-start gap-3.5 group">
+                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(132,61,255,0.4)] mt-0.5">
+                      1
+                    </div>
+                    <p class="text-xs sm:text-sm text-purple-200/90 leading-relaxed pt-0.5">
+                      Enter your WhatsApp number and click <strong class="text-white font-semibold">Generate Pair Code</strong>.
+                    </p>
+                  </div>
+
+                  <div class="flex items-start gap-3.5 group">
+                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(132,61,255,0.4)] mt-0.5">
+                      2
+                    </div>
+                    <p class="text-xs sm:text-sm text-purple-200/90 leading-relaxed pt-0.5">
+                      Copy the code and open <strong class="text-white font-semibold">WhatsApp</strong>.
+                    </p>
+                  </div>
+
+                  <div class="flex items-start gap-3.5 group">
+                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(132,61,255,0.4)] mt-0.5">
+                      3
+                    </div>
+                    <p class="text-xs sm:text-sm text-purple-200/90 leading-relaxed pt-0.5">
+                      Go to <strong class="text-white font-semibold">Linked Devices</strong> &gt; <strong class="text-purple-300 font-semibold">Link with phone number instead</strong>.
+                    </p>
+                  </div>
+
+                  <div class="flex items-start gap-3.5 group">
+                    <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(132,61,255,0.4)] mt-0.5">
+                      4
+                    </div>
+                    <p class="text-xs sm:text-sm text-purple-200/90 leading-relaxed pt-0.5">
+                      Enter the code and enjoy!
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Smartphone Mockup -->
+              <div class="lg:col-span-5 flex justify-center lg:justify-end relative pt-4 lg:pt-0">
+                <div class="relative w-[210px] sm:w-[230px] rounded-[36px] bg-gradient-to-b from-[#1b1442] to-[#0d0926] p-2.5 border-2 border-purple-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.8)] animate-float">
+                  
+                  <!-- Phone Speaker & Notch -->
+                  <div class="w-20 h-4 bg-[#08051a] rounded-full mx-auto mb-2 flex items-center justify-center gap-1.5 border border-purple-900/40">
+                    <div class="w-8 h-1 bg-purple-900/80 rounded-full"></div>
+                    <div class="w-2 h-2 bg-purple-800/80 rounded-full"></div>
+                  </div>
+
+                  <!-- Phone Screen -->
+                  <div class="w-full h-[220px] sm:h-[240px] rounded-[26px] bg-gradient-to-b from-[#0a071f] via-[#100b2e] to-[#070517] p-4 flex flex-col items-center justify-center relative overflow-hidden border border-purple-900/30">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(37,211,102,0.15),transparent_70%)] pointer-events-none"></div>
+
+                    <!-- WhatsApp Big Logo -->
+                    <div class="relative mb-3">
+                      <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] flex items-center justify-center shadow-[0_0_25px_rgba(37,211,102,0.6)]">
+                        <svg class="w-9 h-9 text-white fill-current" viewBox="0 0 24 24">
+                          <path d="M12.004 2c-5.518 0-9.996 4.478-9.996 9.996 0 1.761.459 3.479 1.332 5.002L2 22l5.163-1.328c1.472.802 3.129 1.228 4.841 1.228 5.518 0 9.996-4.478 9.996-9.996 0-5.518-4.478-9.996-9.996-9.996zm0 18.283c-1.503 0-2.973-.404-4.256-1.168l-.305-.181-3.158.812.842-3.078-.198-.316c-.84-1.337-1.284-2.887-1.284-4.472 0-4.57 3.717-8.287 8.287-8.287 4.57 0 8.287 3.717 8.287 8.287 0 4.57-3.717 8.287-8.287 8.287zm4.542-6.208c-.249-.125-1.474-.727-1.703-.81-.229-.083-.395-.125-.561.125-.166.249-.644.81-.789.977-.145.166-.291.187-.54.062s-1.053-.388-2.006-1.238c-.742-.662-1.243-1.48-1.389-1.729-.145-.249-.016-.384.109-.508.112-.112.249-.291.374-.437.125-.145.166-.249.249-.415.083-.166.042-.312-.021-.437-.062-.125-.561-1.351-.769-1.85-.203-.486-.409-.42-.561-.428-.145-.008-.312-.01-.478-.01s-.437.062-.665.312c-.229.249-.873.852-.873 2.078s.894 2.41 1.019 2.577c.125.166 1.76 2.688 4.264 3.769.596.257 1.061.411 1.424.526.598.19 1.143.163 1.574.099.48-.072 1.474-.603 1.682-1.185.208-.582.208-1.081.145-1.185-.062-.104-.229-.166-.478-.291z"/>
+                        </svg>
+                      </div>
+
+                      <div class="absolute -top-1 -right-4 w-3 h-0.5 bg-yellow-400/80 rotate-12"></div>
+                      <div class="absolute 1 -right-5 w-3 h-0.5 bg-yellow-400/80 -rotate-12"></div>
+                      <div class="absolute 4 -right-4 w-3 h-0.5 bg-yellow-400/80 -rotate-45"></div>
+                    </div>
+
+                    <!-- Linked Devices Pill -->
+                    <div class="px-4 py-2 rounded-xl bg-white text-gray-900 font-bold text-xs flex items-center gap-2 shadow-[0_10px_25px_rgba(0,0,0,0.5)] transform translate-y-1">
+                      <i data-lucide="link" class="w-4 h-4 text-gray-800"></i>
+                      <span>Linked Devices</span>
+                    </div>
+
+                  </div>
+
+                  <div class="w-16 h-1 bg-purple-900/60 rounded-full mx-auto mt-2"></div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- BOTTOM PRIVACY BAR -->
+          <footer class="pt-2 pb-4">
+            <div class="max-w-2xl mx-auto rounded-2xl bg-[#090720]/80 border border-purple-900/40 px-5 py-3.5 backdrop-blur-md flex items-center justify-center gap-2 text-center text-xs sm:text-sm text-purple-200/80 shadow-md">
+              <i data-lucide="shield" class="w-4 h-4 text-purple-400 shrink-0"></i>
+              <span>Your privacy is our priority. We never store your personal chats.</span>
+              <span class="text-purple-400 text-sm">💜</span>
+            </div>
+          </footer>
+
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- VIEW 2: SERVERS (SERVER STATUS & REAL-TIME NODES)        -->
+        <!-- ======================================================== -->
+        <div id="view-servers" class="tab-view space-y-6 hidden">
+          
+          <!-- Servers Header -->
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 sm:p-7 rounded-3xl bg-gradient-to-r from-[#140e3b] via-[#0c0926] to-[#08061c] border border-purple-500/30 shadow-xl">
+            <div>
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  3 Public Nodes Operational
+                </span>
+                <span class="text-xs text-purple-300/60">Global Latency: 18ms</span>
+              </div>
+              <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white">
+                NOVA XMD <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-300">Server Clusters</span>
+              </h2>
+              <p class="text-xs sm:text-sm text-purple-200/70 mt-1 max-w-xl">
+                Real-time overview of active server clusters. Choose your preferred node or upgrade to a dedicated VIP instance.
+              </p>
+            </div>
+
+            <!-- Ping Refresh Button -->
+            <button id="refreshServersBtn" class="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 border border-purple-700/40 text-purple-200 hover:text-white text-xs font-bold transition shadow-sm self-start sm:self-auto">
+              <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+              <span id="refreshBtnLabel">Test Latency</span>
+            </button>
+          </div>
+
+          <!-- 3 Real-time Server Cards (Server 1 - Free, Server 2 - VIP Fast, Server 3 - Ultra VIP) -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            
+            <!-- SERVER 1: FREE PUBLIC NODE -->
+            <div class="rounded-3xl bg-[#090724] border border-purple-900/40 p-5 shadow-lg relative overflow-hidden flex flex-col justify-between hover:border-purple-600/50 transition group">
+              <div>
+                <div class="flex items-start justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="text-3xl">🇩🇪</span>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <h4 class="font-bold text-white text-base">Server 1 - Free Node</h4>
+                        <span class="px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 text-[10px] font-bold">Public</span>
+                      </div>
+                      <span class="text-[11px] text-purple-300/60 font-medium">Frankfurt, Germany</span>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Online
+                  </span>
+                </div>
+
+                <div class="space-y-3 text-xs mb-5">
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Ping Latency:</span>
+                    <span class="font-mono font-bold text-emerald-400 server-ping-1">22 ms</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Active Users:</span>
+                    <span class="font-bold text-white">82 / 100 Users</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Speed & Limit:</span>
+                    <span class="font-semibold text-purple-300">Standard Speed (Rate-limited)</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Uptime:</span>
+                    <span class="font-semibold text-white">99.2%</span>
+                  </div>
+                  <!-- Capacity Progress Bar -->
+                  <div class="w-full h-2 bg-purple-950 rounded-full overflow-hidden">
+                    <div class="h-full bg-emerald-500 rounded-full w-[82%]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="server-connect-btn w-full py-2.5 px-3 rounded-xl bg-purple-900/40 border border-purple-700/40 text-purple-300 text-xs font-semibold hover:bg-purple-800/40 transition" data-server="Server 1 - Free">
+                Current Server (Active)
+              </button>
+            </div>
+
+            <!-- SERVER 2: VIP FAST NODE -->
+            <div class="rounded-3xl bg-gradient-to-b from-[#160e3d] to-[#0c0926] border-2 border-purple-500/50 p-5 shadow-[0_10px_30px_rgba(132,61,255,0.2)] relative overflow-hidden flex flex-col justify-between hover:border-purple-400 transition group">
+              <div class="absolute top-0 right-0 bg-gradient-to-l from-purple-600 to-indigo-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-sm">
+                HIGH SPEED ⚡
+              </div>
+
+              <div>
+                <div class="flex items-start justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="text-3xl">🇫🇮</span>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <h4 class="font-bold text-white text-base">Server 2 - VIP Fast</h4>
+                        <span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 text-[10px] font-bold">VIP</span>
+                      </div>
+                      <span class="text-[11px] text-purple-300/60 font-medium">Helsinki, Finland</span>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Online
+                  </span>
+                </div>
+
+                <div class="space-y-3 text-xs mb-5">
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Ping Latency:</span>
+                    <span class="font-mono font-bold text-cyan-400 server-ping-2">14 ms</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Active Users:</span>
+                    <span class="font-bold text-white">34 / 50 VIP Users</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Anti-Ban Engine:</span>
+                    <span class="font-semibold text-emerald-400">Shield v4.2 Enabled</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Uptime:</span>
+                    <span class="font-semibold text-white">99.98%</span>
+                  </div>
+                  <!-- Capacity Progress Bar -->
+                  <div class="w-full h-2 bg-purple-950 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full w-[68%]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="server-connect-btn w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold hover:brightness-110 shadow-glow-purple transition active:scale-95" data-server="Server 2 - VIP Fast">
+                Switch to VIP Fast Server
+              </button>
+            </div>
+
+            <!-- SERVER 3: ULTRA VIP DEDICATED NODE -->
+            <div class="rounded-3xl bg-gradient-to-b from-[#1b1046] via-[#120a35] to-[#0a0720] border-2 border-amber-500/70 p-5 shadow-[0_10px_35px_rgba(245,158,11,0.25)] relative overflow-hidden flex flex-col justify-between hover:border-amber-400 transition group">
+              <div class="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-purple-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl shadow-sm flex items-center gap-1">
+                <i data-lucide="crown" class="w-3 h-3 text-amber-200"></i>
+                <span>MAX PERFORMANCE</span>
+              </div>
+
+              <div>
+                <div class="flex items-start justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="text-3xl">🇺🇸</span>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <h4 class="font-bold text-white text-base">Server 3 - Ultra VIP</h4>
+                        <span class="px-2 py-0.5 rounded-md bg-amber-400/20 text-amber-300 text-[10px] font-extrabold">Dedicated</span>
+                      </div>
+                      <span class="text-[11px] text-purple-300/60 font-medium">New York, USA (10Gbps)</span>
+                    </div>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Online
+                  </span>
+                </div>
+
+                <div class="space-y-3 text-xs mb-5">
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Ping Latency:</span>
+                    <span class="font-mono font-bold text-amber-300 server-ping-3">9 ms (Ultra Low)</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Active Users:</span>
+                    <span class="font-bold text-white">12 / 20 Dedicated Users</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Rate Limit & Ban:</span>
+                    <span class="font-semibold text-emerald-400">Zero Rate-Limit • Anti-Ban Max</span>
+                  </div>
+                  <div class="flex justify-between text-purple-200/70">
+                    <span>Uptime:</span>
+                    <span class="font-semibold text-white">100.0% Guaranteed</span>
+                  </div>
+                  <!-- Capacity Progress Bar -->
+                  <div class="w-full h-2 bg-purple-950 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-amber-400 to-purple-500 rounded-full w-[60%]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="server-connect-btn w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-purple-600 to-indigo-600 text-white text-xs font-black shadow-glow-gold hover:brightness-110 transition active:scale-95" data-server="Server 3 - Ultra VIP">
+                Switch to Ultra VIP Server ✦
+              </button>
+            </div>
+
+          </div>
+
+          <!-- VIP Dedicated Banner -->
+          <div class="rounded-3xl bg-gradient-to-r from-[#1c124a] via-[#150d3a] to-[#0f092b] border-2 border-amber-500/40 p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+              <div class="space-y-2 max-w-xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold">
+                  <i data-lucide="crown" class="w-3.5 h-3.5 text-amber-400"></i>
+                  <span>Private VIP Cluster Available</span>
+                </div>
+                <h3 class="font-display font-black text-xl sm:text-2xl text-white">
+                  Need a Dedicated Server with 100% Zero Disconnection?
+                </h3>
+                <p class="text-xs sm:text-sm text-purple-200/80 leading-relaxed">
+                  Ma doonaysaa server gaar kuu ah (Private Dedicated Instance) oo aan marnaba go’in (No Delay, No Disconnection)? Ku biir macaamiisha VIP-da ah maanta oo kireyso server-kaaga WhatsApp Bot-ka.
+                </p>
+              </div>
+
+              <button class="nav-tab-trigger px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-purple-600 to-indigo-600 text-white font-bold text-sm shadow-glow-gold hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2 shrink-0" data-tab="upgrade">
+                <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i>
+                <span>View VIP Pricing Plans</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- VIEW 3: UPGRADE (VIP PRICING PLANS & BUY MODAL)          -->
+        <!-- ======================================================== -->
+        <div id="view-upgrade" class="tab-view space-y-6 hidden">
+          
+          <!-- Upgrade Header Hero -->
+          <div class="text-center max-w-2xl mx-auto pt-2 pb-4 space-y-3">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-purple-600/20 border border-amber-500/40 text-amber-300 text-xs font-extrabold shadow-glow-gold">
+              <i data-lucide="crown" class="w-4 h-4 text-amber-400"></i>
+              <span>NOVA XMD PREMIUM INFRASTRUCTURE</span>
+            </div>
+            
+            <h2 class="font-display font-black text-2xl sm:text-4xl text-white">
+              Upgrade to <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-fuchsia-400 to-purple-400">VIP Servers</span>
+            </h2>
+            
+            <p class="text-xs sm:text-sm text-purple-200/80 leading-relaxed">
+              Kireyso server-ro xoog leh oo loogu talagalay WhatsApp Bot-kaaga. Xawaare sare, Anti-Ban adag, badbaadinta status-ka iyo view-once media adiga oo aan waligaa go'ayn.
+            </p>
+          </div>
+
+          <!-- 3 PRICING TIERS (Starter, Pro VIP, Ultimate Server) -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+            
+            <!-- PLAN 1: STARTER SERVER -->
+            <div class="rounded-3xl bg-[#090722]/90 border border-purple-900/40 p-6 flex flex-col justify-between hover:border-purple-600/50 transition group shadow-lg">
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <span class="text-xs font-bold text-purple-300 uppercase tracking-wider">Starter Plan</span>
+                  <span class="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-300">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
+                  </span>
+                </div>
+                
+                <h3 class="font-display font-bold text-xl text-white">Starter Server</h3>
+                <p class="text-xs text-purple-300/60 mt-1 mb-5">Ku fiican dadka bilaabayaasha ah ee raba bot deggan oo hal number ah.</p>
+                
+                <div class="flex items-baseline gap-1 mb-6 pb-6 border-b border-purple-900/40">
+                  <span class="text-3xl sm:text-4xl font-display font-black text-white">$3</span>
+                  <span class="text-xs text-purple-300/60 font-medium">/ bishii (Monthly)</span>
+                </div>
+
+                <ul class="space-y-3 text-xs text-purple-200/90 mb-6">
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span><strong>1 WhatsApp Number</strong> Pairing</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span><strong>No Expiry</strong> (Session-ka ma dhaco)</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span>Basic <strong>Anti-Ban Protection</strong></span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span>Standard View Once Saver</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span>99.2% Server Uptime</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Buy Now Trigger Button -->
+              <button 
+                class="buy-plan-btn w-full py-3.5 px-4 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 border border-purple-700/50 text-white font-bold text-xs text-center transition flex items-center justify-center gap-2 group-hover:border-purple-500 active:scale-95"
+                data-plan="Starter Server"
+                data-price="$3 / bishii"
+              >
+                <span>Buy Now ($3)</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <!-- PLAN 2: PRO VIP SERVER (BEST SELLER) -->
+            <div class="rounded-3xl bg-gradient-to-b from-[#1b1046] via-[#120a35] to-[#0b0826] border-2 border-amber-500/70 p-6 flex flex-col justify-between shadow-[0_10px_40px_rgba(245,158,11,0.25)] relative transform md:-translate-y-2">
+              
+              <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-500 to-purple-600 text-white text-[11px] font-extrabold uppercase tracking-widest shadow-md flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-3 h-3 text-yellow-200"></i>
+                <span>BEST SELLER ★ VIP</span>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center mb-4 mt-2">
+                  <span class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">Most Recommended</span>
+                  <span class="w-8 h-8 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300">
+                    <i data-lucide="crown" class="w-4 h-4"></i>
+                  </span>
+                </div>
+                
+                <h3 class="font-display font-black text-2xl text-white">Pro VIP Server</h3>
+                <p class="text-xs text-purple-200/70 mt-1 mb-5">Xalka ugu fiican ee bot-yada WhatsApp-ka ee kooxaha iyo isticmaaleyaasha firfircoon.</p>
+                
+                <div class="flex items-baseline gap-1 mb-6 pb-6 border-b border-purple-900/50">
+                  <span class="text-3xl sm:text-4xl font-display font-black text-white">$6</span>
+                  <span class="text-xs text-purple-300/80 font-medium">/ bishii (Monthly)</span>
+                </div>
+
+                <ul class="space-y-3 text-xs text-purple-100 mb-6">
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span class="font-bold text-white">Up to 3 WhatsApp Devices</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span class="font-bold text-white">Ultra Fast Anti-Ban Engine v4</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span class="font-bold text-amber-300">Unlimited View Once & Auto Status Saver</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span>24/7 Priority Dedicated Server (0 Delay)</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span>Auto Reconnect & Multi-Device sync</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Buy Now Trigger Button -->
+              <button 
+                class="buy-plan-btn w-full py-4 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-purple-600 to-indigo-600 text-white font-black text-sm text-center shadow-glow-gold hover:brightness-110 active:scale-[0.98] transition flex items-center justify-center gap-2"
+                data-plan="Pro VIP Server"
+                data-price="$6 / bishii"
+              >
+                <i data-lucide="crown" class="w-4 h-4 text-amber-200"></i>
+                <span>Buy Now ($6) ✦</span>
+              </button>
+            </div>
+
+            <!-- PLAN 3: ULTIMATE SERVER -->
+            <div class="rounded-3xl bg-[#090722]/90 border border-purple-900/40 p-6 flex flex-col justify-between hover:border-purple-600/50 transition group shadow-lg">
+              <div>
+                <div class="flex justify-between items-center mb-4">
+                  <span class="text-xs font-bold text-purple-300 uppercase tracking-wider">Enterprise Tier</span>
+                  <span class="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-300">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                  </span>
+                </div>
+                
+                <h3 class="font-display font-bold text-xl text-white">Ultimate Server</h3>
+                <p class="text-xs text-purple-300/60 mt-1 mb-5">Server gaar kuu ah (Private Dedicated Instance) oo leh 10Gbps line & SSH access.</p>
+                
+                <div class="flex items-baseline gap-1 mb-6 pb-6 border-b border-purple-900/40">
+                  <span class="text-3xl sm:text-4xl font-display font-black text-white">$12</span>
+                  <span class="text-xs text-purple-300/60 font-medium">/ bishii (Monthly)</span>
+                </div>
+
+                <ul class="space-y-3 text-xs text-purple-200/90 mb-6">
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span class="font-bold text-white">Unlimited WhatsApp Numbers</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span class="font-bold text-white">100% Private Dedicated Core</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span>Anti-Ban Ultimate Shield & Zero Delay</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span>Custom Bot Subdomain & Control Panel</span>
+                  </li>
+                  <li class="flex items-center gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span>24/7 Priority VIP Developer Support</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Buy Now Trigger Button -->
+              <button 
+                class="buy-plan-btn w-full py-3.5 px-4 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 border border-purple-700/50 text-white font-bold text-xs text-center transition flex items-center justify-center gap-2 group-hover:border-purple-500 active:scale-95"
+                data-plan="Ultimate Server"
+                data-price="$12 / bishii"
+              >
+                <span>Buy Now ($12)</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Direct Payment & Support Help Bar -->
+          <div class="rounded-2xl bg-[#090720]/80 border border-purple-900/40 p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                <i data-lucide="credit-card" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">Hababka Lacag-bixinta (Payment Options)</h4>
+                <p class="text-xs text-purple-200/70">Zaad, eDahab, EVC Plus, Sahal, Binance USDT, ama Kaadhka Bangiga.</p>
+              </div>
+            </div>
+
+            <a href="https://wa.me/252611234567?text=Asc%20Maamulka%20NOVA%20XMD,%20waxaan%20doonayaa%20in%20aan%20iibsado%20VIP%20Server" target="_blank" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2 shrink-0 transition">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+              <span>Kala Xiriir Maamulka WhatsApp</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- VIEW 4: DASHBOARD (BOT STATUS & DISCONNECT)              -->
+        <!-- ======================================================== -->
+        <div id="view-dashboard" class="tab-view space-y-6 hidden">
+          
+          <!-- Dashboard Header -->
+          <div class="p-6 rounded-3xl bg-gradient-to-r from-[#140e3b] via-[#0c0926] to-[#08061c] border border-purple-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold">
+                  NOVA Session Hub
+                </span>
+                <span class="text-xs text-purple-300/60">Live Monitor</span>
+              </div>
+              <h2 class="font-display font-extrabold text-2xl text-white">
+                Bot Status & Management
+              </h2>
+              <p class="text-xs text-purple-200/70 mt-1">
+                Kala soco xaaladda bot-kaaga, xawaaraha adeegga, iyo fariimaha la kaydiyay.
+              </p>
+            </div>
+
+            <!-- Bot Power Action (Disconnect / Logout) -->
+            <button id="disconnectBotBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/40 text-rose-300 text-xs font-bold transition shadow-sm active:scale-95 self-start sm:self-auto">
+              <i data-lucide="log-out" class="w-4 h-4 text-rose-400"></i>
+              <span id="disconnectBtnLabel">Disconnect / Logout Bot</span>
+            </button>
+          </div>
+
+          <!-- BOT ACTIVE STATUS CARD -->
+          <div class="rounded-3xl bg-[#090724] border border-purple-900/40 p-6 shadow-xl relative overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+              
+              <!-- Left: Avatar & Connection Status -->
+              <div class="flex items-center gap-4">
+                <div class="relative">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#25D366] to-[#128C7E] flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.4)]">
+                    <svg class="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
+                      <path d="M12.004 2c-5.518 0-9.996 4.478-9.996 9.996 0 1.761.459 3.479 1.332 5.002L2 22l5.163-1.328c1.472.802 3.129 1.228 4.841 1.228 5.518 0 9.996-4.478 9.996-9.996 0-5.518-4.478-9.996-9.996-9.996zm0 18.283c-1.503 0-2.973-.404-4.256-1.168l-.305-.181-3.158.812.842-3.078-.198-.316c-.84-1.337-1.284-2.887-1.284-4.472 0-4.57 3.717-8.287 8.287-8.287 4.57 0 8.287 3.717 8.287 8.287 0 4.57-3.717 8.287-8.287 8.287zm4.542-6.208c-.249-.125-1.474-.727-1.703-.81-.229-.083-.395-.125-.561.125-.166.249-.644.81-.789.977-.145.166-.291.187-.54.062s-1.053-.388-2.006-1.238c-.742-.662-1.243-1.48-1.389-1.729-.145-.249-.016-.384.109-.508.112-.112.249-.291.374-.437.125-.145.166-.249.249-.415.083-.166.042-.312-.021-.437-.062-.125-.561-1.351-.769-1.85-.203-.486-.409-.42-.561-.428-.145-.008-.312-.01-.478-.01s-.437.062-.665.312c-.229.249-.873.852-.873 2.078s.894 2.41 1.019 2.577c.125.166 1.76 2.688 4.264 3.769.596.257 1.061.411 1.424.526.598.19 1.143.163 1.574.099.48-.072 1.474-.603 1.682-1.185.208-.582.208-1.081.145-1.185-.062-.104-.229-.166-.478-.291z"/>
+                    </svg>
+                  </div>
+                  <span id="botLiveBadge" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-[#090724] shadow-[0_0_8px_#10b981]"></span>
+                </div>
+
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="font-display font-bold text-lg text-white" id="connectedNumberDisplay">+252 61 ••• ••••</h3>
+                    <span id="botStatusTag" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Connected</span>
+                  </div>
+                  <p class="text-xs text-purple-300/60 mt-0.5">Session: <span class="font-mono text-emerald-400" id="botSessionTag">NOVA-SESSION-ACTIVE</span></p>
+                </div>
+              </div>
+
+              <!-- Middle: Uptime & Anti-Ban Stats -->
+              <div class="space-y-1.5 border-y md:border-y-0 md:border-x border-purple-900/40 py-3 md:py-0 md:px-6">
+                <div class="flex justify-between text-xs">
+                  <span class="text-purple-300/60">Uptime:</span>
+                  <span class="font-semibold text-white" id="botUptimeDisplay">Live (Real-time)</span>
+                </div>
+                <div class="flex justify-between text-xs">
+                  <span class="text-purple-300/60">Anti-Ban Shield:</span>
+                  <span class="font-bold text-emerald-400">v4.2 Active (Protected)</span>
+                </div>
+                <div class="flex justify-between text-xs">
+                  <span class="text-purple-300/60">Current Node:</span>
+                  <span class="font-semibold text-purple-300">Server 1 (Frankfurt)</span>
+                </div>
+              </div>
+
+              <!-- Right: Quick Session Actions -->
+              <div class="flex flex-col gap-2">
+                <!-- Dynamic Link Device Button (Shown when Disconnected) -->
+                <button id="dashboardLinkDeviceBtn" type="button" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30 hidden active:scale-95">
+                  <i data-lucide="scan" class="w-3.5 h-3.5"></i>
+                  <span>Link Device (Scan QR Code)</span>
+                </button>
+                <button id="restartBotBtn" class="w-full py-2 px-3 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 border border-purple-700/40 text-purple-200 text-xs font-semibold transition flex items-center justify-center gap-2">
+                  <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                  <span>Restart Bot Session</span>
+                </button>
+                <button class="nav-tab-trigger w-full py-2 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-xs font-bold transition flex items-center justify-center gap-2" data-tab="upgrade">
+                  <i data-lucide="crown" class="w-3.5 h-3.5"></i>
+                  <span>Switch to VIP Server</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BOT FEATURES & SAVED MEDIA COUNTERS -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- Card 1 -->
+            <div class="p-4 rounded-2xl bg-[#090724] border border-purple-900/40 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center">
+                <i data-lucide="eye" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-[11px] text-purple-300/60 font-medium">View Once Saved</p>
+                <h4 class="font-bold text-white text-lg" id="statViewOnceCount">19 Media</h4>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="p-4 rounded-2xl bg-[#090724] border border-purple-900/40 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center">
+                <i data-lucide="download-cloud" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-[11px] text-purple-300/60 font-medium">Status Stories Saved</p>
+                <h4 class="font-bold text-white text-lg" id="statStatusSavedCount">48 Stories</h4>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="p-4 rounded-2xl bg-[#090724] border border-purple-900/40 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center">
+                <i data-lucide="message-square" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-[11px] text-purple-300/60 font-medium">Messages Handled</p>
+                <h4 class="font-bold text-white text-lg" id="statMessagesHandledCount">14,290</h4>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="p-4 rounded-2xl bg-[#090724] border border-purple-900/40 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center">
+                <i data-lucide="activity" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-[11px] text-purple-300/60 font-medium">Response Latency</p>
+                <h4 class="font-bold text-white text-lg">0.38s</h4>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- VIEW 5: SETTINGS (BOT CONFIGURATION)                     -->
+        <!-- ======================================================== -->
+        <div id="view-settings" class="tab-view space-y-6 hidden">
+          
+          <div class="p-6 rounded-3xl bg-gradient-to-r from-[#140e3b] via-[#0c0926] to-[#08061c] border border-purple-500/30">
+            <h2 class="font-display font-extrabold text-2xl text-white">Bot & System Settings</h2>
+            <p class="text-xs text-purple-200/70 mt-1">
+              Habee hab-dhaqanka bot-kaaga, calaamadaha (Prefix), iyo ogeysiisyada sirta ah.
+            </p>
+          </div>
+
+          <!-- Settings Form -->
+          <div class="rounded-3xl bg-[#090724] border border-purple-900/40 p-6 space-y-6">
+            
+            <!-- Setting 1: Prefix -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-purple-900/30">
+              <div>
+                <h4 class="font-bold text-white text-sm">Bot Command Prefix</h4>
+                <p class="text-xs text-purple-300/60 mt-0.5">Calaamadda lagu bilaabayo amarrada bot-ka (tusaale: .menu ama !help).</p>
+              </div>
+              <div class="w-32">
+                <select id="botPrefixSelect" class="w-full bg-[#110c30] border border-purple-800/60 text-white rounded-xl px-3 py-2 text-xs font-mono focus:outline-none focus:border-purple-500">
+                  <option value=".">. (Dot)</option>
+                  <option value="!">! (Exclamation)</option>
+                  <option value="#"># (Hash)</option>
+                  <option value="$">$ (Dollar)</option>
+                  <option value="multi">All / Multi</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Setting 2: Work Mode -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-purple-900/30">
+              <div>
+                <h4 class="font-bold text-white text-sm">Bot Work Mode</h4>
+                <p class="text-xs text-purple-300/60 mt-0.5">Qofka amarka siin kara bot-ka (Public mise adiga oo kaliya).</p>
+              </div>
+              <div class="w-36">
+                <select id="botModeSelect" class="w-full bg-[#110c30] border border-purple-800/60 text-white rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-purple-500">
+                  <option value="public">Public (Dadka oo dhan)</option>
+                  <option value="self">Self (Aniga oo kaliya)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Setting 3: Auto Status Read -->
+            <div class="flex items-center justify-between pb-5 border-b border-purple-900/30">
+              <div>
+                <h4 class="font-bold text-white text-sm">Auto Status Read</h4>
+                <p class="text-xs text-purple-300/60 mt-0.5">In bot-ku si toos ah u daawado status-yada saaxiibadaada.</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="settingAutoStatus" class="sr-only peer" checked>
+                <div class="w-11 h-6 bg-purple-950 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+              </label>
+            </div>
+
+            <!-- Setting 4: Anti-Delete Messages -->
+            <div class="flex items-center justify-between pb-5 border-b border-purple-900/30">
+              <div>
+                <h4 class="font-bold text-white text-sm">Anti-Delete Message Recovery</h4>
+                <p class="text-xs text-purple-300/60 mt-0.5">Haddii qofku fariin tirtiro (Revoke), in bot-ku kuu soo gudbiyo.</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="settingAntiDelete" class="sr-only peer" checked>
+                <div class="w-11 h-6 bg-purple-950 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+              </label>
+            </div>
+
+            <!-- Save Settings Button -->
+            <div class="flex justify-end pt-2">
+              <button id="saveSettingsBtn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-xs shadow-glow-purple hover:brightness-110 active:scale-95 transition">
+                Save Changes
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- VIEW 6: SUPPORT & HELPDESK                               -->
+        <!-- ======================================================== -->
+        <div id="view-support" class="tab-view space-y-6 hidden">
+          <div class="p-6 rounded-3xl bg-gradient-to-r from-[#140e3b] via-[#0c0926] to-[#08061c] border border-purple-500/30">
+            <h2 class="font-display font-extrabold text-2xl text-white">Support & VIP Assistance</h2>
+            <p class="text-xs text-purple-200/70 mt-1">
+              Kooxda NOVA XMD waxay diyaar kuu tahay 24/7 si ay kaaga caawiso wax walba oo ku saabsan bot-kaaga iyo server-rada.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <a href="https://wa.me/252611234567?text=Asc%20NOVA%20XMD%20Support,%20waxaan%20u%20baahan%20ahay%20caawimaad" target="_blank" class="p-6 rounded-3xl bg-[#090724] border border-purple-900/40 hover:border-emerald-500/50 transition group shadow-lg flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-[#25D366]/20 text-[#25D366] flex items-center justify-center shrink-0">
+                <i data-lucide="message-circle" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base group-hover:text-emerald-400 transition">Official WhatsApp Support</h4>
+                <p class="text-xs text-purple-200/70 mt-1">Si toos ah ula hadal maamulka iyo farsamo-yaqaannada NOVA XMD.</p>
+                <span class="inline-block mt-3 text-xs font-bold text-emerald-400">Fur WhatsApp &rarr;</span>
+              </div>
+            </a>
+
+            <a href="https://t.me/novaxmd" target="_blank" class="p-6 rounded-3xl bg-[#090724] border border-purple-900/40 hover:border-cyan-500/50 transition group shadow-lg flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center shrink-0">
+                <i data-lucide="send" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-base group-hover:text-cyan-400 transition">Telegram VIP Channel</h4>
+                <p class="text-xs text-purple-200/70 mt-1">Kala soco wararkii ugu dambeeyay, updates-ka bot-ka, iyo server-rada cusub.</p>
+                <span class="inline-block mt-3 text-xs font-bold text-cyan-400">Ku biir Telegram &rarr;</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- VIEW 7: ABOUT NOVA XMD                                   -->
+        <!-- ======================================================== -->
+        <div id="view-about" class="tab-view space-y-6 hidden">
+          <div class="p-8 rounded-3xl bg-[#0a0724] border border-purple-900/40 text-center space-y-4">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 p-[2px] mx-auto shadow-glow-purple">
+              <div class="w-full h-full bg-[#0a0720] rounded-[14px] flex items-center justify-center">
+                <span class="font-display font-black text-2xl text-white">N</span>
+              </div>
+            </div>
+            <h3 class="font-display font-extrabold text-2xl text-white">NOVA XMD Multi-Device Engine</h3>
+            <p class="text-xs sm:text-sm text-purple-200/80 max-w-lg mx-auto leading-relaxed">
+              NOVA XMD waa nidaam casri ah oo loogu talagalay isku xirka WhatsApp Bots adduunka oo dhan, iyadoo la adeegsanayo tignoolajiyada ugu casrisan ee Multi-Device Pairing Code & Dedicated Cloud Clusters.
+            </p>
+            <div class="pt-2 flex flex-wrap gap-3 justify-center">
+              <button class="nav-tab-trigger px-5 py-2.5 rounded-xl bg-purple-600 text-white font-semibold text-xs" data-tab="home">
+                Ku Laabo Home
+              </button>
+              <button class="nav-tab-trigger px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-purple-600 text-white font-semibold text-xs" data-tab="upgrade">
+                Kireyso VIP Server ✦
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- ================= PAYMENT MODAL (ZAAD, EDAHAB, EVC PLUS, WHATSAPP) ================= -->
+  <div id="paymentModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="relative w-full max-w-md rounded-3xl bg-[#0c0926] border border-amber-500/50 p-6 text-left shadow-[0_20px_60px_rgba(0,0,0,0.9)] animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Close Button -->
+      <button id="closePaymentModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+          <i data-lucide="crown" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-[10px] uppercase font-bold text-amber-400 tracking-wider">Payment Checkout</span>
+          <h3 class="font-display font-black text-lg text-white" id="modalPlanTitle">Pro VIP Server</h3>
+        </div>
+      </div>
+
+      <!-- Price summary banner -->
+      <div class="p-3.5 rounded-2xl bg-[#140e3b] border border-purple-800/50 flex items-center justify-between mb-5">
+        <span class="text-xs text-purple-200/80">Qiimaha Qorshahan (Amount):</span>
+        <span class="font-display font-black text-xl text-amber-300" id="modalPlanPrice">$6 / bishii</span>
+      </div>
+
+      <!-- Payment Tabs (Zaad, eDahab, EVC Plus) -->
+      <div class="space-y-3">
+        <p class="text-xs font-bold text-white uppercase tracking-wider">Dooro Habka Lacag-bixinta:</p>
+
+        <!-- Method 1: Zaad (Telesom) -->
+        <div class="p-3.5 rounded-xl bg-[#070518] border border-purple-900/60 hover:border-emerald-500/60 transition cursor-pointer payment-option-card">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2 py-1 rounded bg-amber-500/20 text-amber-400 text-xs font-black">ZAAD</span>
+              <span class="text-xs font-semibold text-white">Telesom Zaad Service</span>
+            </div>
+            <button class="copy-pay-num text-xs text-purple-300 hover:text-white font-mono bg-purple-950/60 px-2 py-1 rounded border border-purple-800" data-number="0634123456">
+              0634123456 📋
+            </button>
+          </div>
+          <p class="text-[11px] text-purple-300/60 mt-2 font-mono">Dial: *880*0634123456*Amount#</p>
+        </div>
+
+        <!-- Method 2: eDahab (Somtel) -->
+        <div class="p-3.5 rounded-xl bg-[#070518] border border-purple-900/60 hover:border-emerald-500/60 transition cursor-pointer payment-option-card">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2 py-1 rounded bg-yellow-500/20 text-yellow-300 text-xs font-black">eDahab</span>
+              <span class="text-xs font-semibold text-white">Somtel eDahab</span>
+            </div>
+            <button class="copy-pay-num text-xs text-purple-300 hover:text-white font-mono bg-purple-950/60 px-2 py-1 rounded border border-purple-800" data-number="0659123456">
+              0659123456 📋
+            </button>
+          </div>
+          <p class="text-[11px] text-purple-300/60 mt-2 font-mono">Dial: *770*0659123456*Amount#</p>
+        </div>
+
+        <!-- Method 3: EVC Plus (Hormuud) -->
+        <div class="p-3.5 rounded-xl bg-[#070518] border border-purple-900/60 hover:border-emerald-500/60 transition cursor-pointer payment-option-card">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 text-xs font-black">EVC</span>
+              <span class="text-xs font-semibold text-white">Hormuud EVC Plus</span>
+            </div>
+            <button class="copy-pay-num text-xs text-purple-300 hover:text-white font-mono bg-purple-950/60 px-2 py-1 rounded border border-purple-800" data-number="0615123456">
+              0615123456 📋
+            </button>
+          </div>
+          <p class="text-[11px] text-purple-300/60 mt-2 font-mono">Dial: *712*0615123456*Amount#</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-5 space-y-2">
+        <a 
+          id="confirmPaymentWhatsAppBtn" 
+          href="https://wa.me/252611234567?text=Waxaan%20bixiyay%20lacagtii%20VIP%20Server-ka" 
+          target="_blank" 
+          class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition hover:brightness-110"
+        >
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          <span>U Dir Rasiidka WhatsApp-ka Maamulka</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QR CODE MODAL -->
+  <div id="qrModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="relative w-full max-w-sm rounded-3xl bg-[#0e0a29] border border-purple-500/40 p-6 text-center shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+      <button id="closeQrModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center mx-auto mb-3 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+        <i data-lucide="scan" class="w-6 h-6"></i>
+      </div>
+
+      <h3 class="font-display font-bold text-xl text-white">Scan QR Code</h3>
+      <p class="text-xs text-purple-200/70 mt-1 mb-4">
+        Open WhatsApp &gt; Settings &gt; Linked Devices &gt; Scan QR code
+      </p>
+
+      <!-- Live QR Box Container -->
+      <div id="qrBox" class="w-52 h-52 sm:w-56 sm:h-56 p-2 bg-white rounded-2xl relative mx-auto mb-4 flex items-center justify-center shadow-[0_0_25px_rgba(168,85,247,0.25)] overflow-hidden">
+        <!-- Loading State -->
+        <div id="qrLoadingState" class="absolute inset-0 bg-[#0c0926]/95 backdrop-blur-sm rounded-2xl flex flex-col items-center justify-center p-4 text-center z-10 transition-all duration-300">
+          <div class="w-9 h-9 border-3 border-purple-500 border-t-transparent rounded-full animate-spin mb-3"></div>
+          <p id="qrLoadingText" class="text-xs font-semibold text-purple-200">Generating Live WhatsApp QR...</p>
+          <span class="text-[10px] text-gray-400 mt-1">Connecting to Baileys Multi-Device</span>
+        </div>
+
+        <!-- Live QR Image from Baileys -->
+        <img 
+          id="qrImage"
+          src="" 
+          alt="WhatsApp QR Code" 
+          class="w-full h-full object-contain rounded-xl hidden transition-all duration-300"
+        >
+      </div>
+
+      <!-- Live Expiry & Status Indicator -->
+      <div class="flex items-center justify-between text-xs px-3 py-2 rounded-xl bg-purple-950/50 border border-purple-500/20 mb-3 text-purple-200">
+        <div class="flex items-center gap-1.5">
+          <span id="qrStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="qrStatusText">Baileys Session Live</span>
+        </div>
+        <div class="font-mono text-purple-300 flex items-center gap-1">
+          <span>Expires:</span>
+          <span id="qrCountdown" class="font-bold text-amber-400">20</span>s
+        </div>
+      </div>
+
+      <!-- Refresh QR Button -->
+      <button id="refreshQrBtn" type="button" class="w-full py-2 px-3 rounded-xl bg-purple-600/20 hover:bg-purple-600/35 border border-purple-500/30 text-purple-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all mb-3 active:scale-95">
+        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+        <span>Refresh QR Code</span>
+      </button>
+
+      <!-- Quick Steps -->
+      <div class="pt-3 border-t border-purple-500/20 text-[11px] text-gray-400 text-left space-y-1.5">
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full bg-purple-600/30 text-purple-300 flex items-center justify-center font-bold text-[9px]">1</span>
+          <span>Open WhatsApp on your phone</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full bg-purple-600/30 text-purple-300 flex items-center justify-center font-bold text-[9px]">2</span>
+          <span>Tap <b>Menu ⋮</b> or <b>Settings ⚙️ &gt; Linked Devices</b></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full bg-purple-600/30 text-purple-300 flex items-center justify-center font-bold text-[9px]">3</span>
+          <span>Point your camera at this QR code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer" class="fixed bottom-20 lg:bottom-6 right-4 sm:right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

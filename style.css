@@ -1,0 +1,106 @@
+/* ===================================================
+   NOVA XMD - Custom Theme & Animation Styles
+   =================================================== */
+
+@layer utilities {
+  .bg-size-200 {
+    background-size: 200% 200%;
+  }
+  .bg-pos-100 {
+    background-position: 100% 100%;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 12px);
+  }
+}
+
+/* Custom Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar for Dropdowns & Page */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070514;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a1f5d;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6333bb;
+}
+
+/* Glassmorphism subtle helper */
+.glass-panel {
+  background: rgba(12, 10, 36, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(132, 61, 255, 0.2);
+}
+
+/* Glowing Neon Elements */
+.neon-glow-purple {
+  box-shadow: 0 0 25px rgba(132, 61, 255, 0.45),
+              0 0 60px rgba(132, 61, 255, 0.15);
+}
+
+.neon-glow-gold {
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.45),
+              0 0 50px rgba(245, 158, 11, 0.2);
+}
+
+/* Pulse Animation for status dots */
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px #10b981;
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.15);
+    box-shadow: 0 0 18px #10b981;
+  }
+}
+
+.animate-neon-status {
+  animation: neonPulse 2s infinite ease-in-out;
+}
+
+/* Floating animation for VIP CTA */
+@keyframes vipBadgeFloat {
+  0%, 100% {
+    transform: translateY(-4px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.03);
+  }
+}
+
+.animate-vip-float {
+  animation: vipBadgeFloat 3s infinite ease-in-out;
+}
+
+/* Tab View Transition */
+.tab-view {
+  animation: fadeInView 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInView {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

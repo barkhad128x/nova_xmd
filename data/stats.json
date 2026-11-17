@@ -1,0 +1,41 @@
+{
+  "baseUsers": 80,
+  "usersList": [
+    "252615555555",
+    "252636287196"
+  ],
+  "totalSlots": 100,
+  "growthPercentage": 12,
+  "messagesHandled": 14298,
+  "viewOnceSaved": 19,
+  "statusSaved": 56,
+  "serverNodes": [
+    {
+      "id": 1,
+      "name": "Server 1 - Free Node",
+      "location": "Frankfurt, Germany",
+      "ping": 18,
+      "online": true,
+      "users": 82,
+      "max": 100
+    },
+    {
+      "id": 2,
+      "name": "Server 2 - VIP Fast",
+      "location": "Helsinki, Finland",
+      "ping": 14,
+      "online": true,
+      "users": 34,
+      "max": 50
+    },
+    {
+      "id": 3,
+      "name": "Server 3 - Ultra VIP",
+      "location": "New York, USA",
+      "ping": 9,
+      "online": true,
+      "users": 12,
+      "max": 20
+    }
+  ]
+}
